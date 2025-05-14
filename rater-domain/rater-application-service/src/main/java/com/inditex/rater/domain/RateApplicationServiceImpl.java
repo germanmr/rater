@@ -1,4 +1,4 @@
-package com.inditex.rater.domain.ports.input.service;
+package com.inditex.rater.domain;
 
 import com.inditex.rater.domain.dto.RateProductRequest;
 import com.inditex.rater.domain.dto.RateProductResponse;
@@ -6,6 +6,7 @@ import com.inditex.rater.domain.entity.Brand;
 import com.inditex.rater.domain.entity.Product;
 import com.inditex.rater.domain.exception.BrandNotFoundException;
 import com.inditex.rater.domain.exception.ProductNotFoundException;
+import com.inditex.rater.domain.ports.input.service.RateApplicationService;
 import com.inditex.rater.domain.ports.output.repository.BrandRepository;
 import com.inditex.rater.domain.ports.output.repository.ProductRepository;
 import com.inditex.rater.domain.valueobject.BrandId;
@@ -41,14 +42,14 @@ public class RateApplicationServiceImpl implements RateApplicationService {
     private void checkBrand(final Integer brandId) {
         final Optional<Brand> optional = brandRepository.getByBrandId(new BrandId(brandId));
         if (optional.isEmpty()) {
-            throw new BrandNotFoundException("Could not brand with id: " + brandId);
+            throw new BrandNotFoundException("Could not find brand with id: " + brandId);
         }
     }
 
     private void checkProduct(final Integer productId) {
         final Optional<Product> optional = productRepository.getByProductId(new ProductId(productId));
         if (optional.isEmpty()) {
-            throw new ProductNotFoundException("Could not product with id: " + productId);
+            throw new ProductNotFoundException("Could not find product with id: " + productId);
         }
     }
 }
