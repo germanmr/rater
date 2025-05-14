@@ -29,6 +29,32 @@
         <immutables.version>2.2.10</immutables.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.inditex</groupId>
+                <artifactId>rater-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.inditex</groupId>
+                <artifactId>rater-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.inditex</groupId>
+                <artifactId>rater-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.inditex</groupId>
+                <artifactId>rater-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.immutables</groupId>
