@@ -26,9 +26,16 @@
 
     <properties>
         <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
+        <immutables.version>2.2.10</immutables.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.immutables</groupId>
+            <artifactId>value</artifactId>
+            <version>${immutables.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
