@@ -6,6 +6,7 @@ import com.inditex.rater.domain.entity.Brand;
 import com.inditex.rater.domain.exception.BrandNotFoundException;
 import com.inditex.rater.domain.exception.ProductNotFoundException;
 import com.inditex.rater.domain.ports.output.repository.BrandRepository;
+import com.inditex.rater.domain.ports.output.repository.PriceListRepository;
 import com.inditex.rater.domain.ports.output.repository.ProductRepository;
 import com.inditex.rater.domain.valueobject.BrandId;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,30 +27,32 @@ import static org.mockito.Mockito.when;
 })
 class RateApplicationServiceImplTest {
 
-    private final Integer brandId = 1;
-    private final Integer productId = 35455;
-    private final LocalDateTime applyDate = LocalDateTime.of(2025, Month.JANUARY, 14, 10, 00, 00);
+    private final Long brandId = 1L;
+    private final Long productId = 35455L;
+    private final LocalDateTime applyDate = LocalDateTime.of(2020, Month.JUNE, 14, 10, 00, 00);
 
     private final Brand brand = Brand.builder()
-            .brandId(new BrandId(1))
+            .brandId(new BrandId(1L))
             .name("ZARA")
             .build();
 
     private final RateProductRequest rateProductRequest =
             new RateProductRequest(brandId, productId, applyDate);
-
     private RateApplicationServiceImpl rateApplicationService;
 
     @Autowired
     private BrandRepository brandRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private PriceListRepository priceListRepository;
 
     @BeforeEach
     void init() {
         this.rateApplicationService = new RateApplicationServiceImpl(
                 brandRepository,
-                productRepository);
+                productRepository,
+                priceListRepository);
     }
 
     @Test

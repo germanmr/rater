@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public final class Price extends BaseId<BigDecimal> {
 
-    public Price(BigDecimal value) {
+    public Price(final BigDecimal value) {
         super(value);
     }
 }

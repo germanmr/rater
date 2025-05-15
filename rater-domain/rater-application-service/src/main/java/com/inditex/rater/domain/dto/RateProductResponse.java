@@ -5,32 +5,32 @@ import java.time.LocalDateTime;
 
 public class RateProductResponse {
 
-    private final Integer brandId;
-    private final Integer productId;
-    private final BigDecimal price;
+    private final Long brandId;
+    private final Long productId;
+    private final Long priceList;
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
     private final BigDecimal finalPrice;
 
-    public RateProductResponse(Integer brandId, Integer productId, BigDecimal price, LocalDateTime startDate, LocalDateTime endDate, BigDecimal finalPrice) {
+    public RateProductResponse(Long brandId, Long productId, Long priceList, LocalDateTime startDate, LocalDateTime endDate, BigDecimal finalPrice) {
         this.brandId = brandId;
         this.productId = productId;
-        this.price = price;
+        this.priceList = priceList;
         this.startDate = startDate;
         this.endDate = endDate;
         this.finalPrice = finalPrice;
     }
 
-    public Integer getBrandId() {
+    public Long getBrandId() {
         return brandId;
     }
 
-    public Integer getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public Long getPriceList() {
+        return priceList;
     }
 
     public LocalDateTime getStartDate() {

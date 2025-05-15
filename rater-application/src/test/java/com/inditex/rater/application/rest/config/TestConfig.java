@@ -1,4 +1,4 @@
-package com.inditex.rater.domain.config;
+package com.inditex.rater.application.rest.config;
 
 import com.inditex.rater.domain.ports.output.repository.BrandRepository;
 import com.inditex.rater.domain.ports.output.repository.PriceListRepository;
@@ -14,7 +14,6 @@ public class TestConfig {
     public BrandRepository brandRepository(){
         return Mockito.mock(BrandRepository.class);
     }
-
     @Bean
     public ProductRepository productRepository(){
         return Mockito.mock(ProductRepository.class);

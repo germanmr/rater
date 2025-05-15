@@ -18,5 +18,21 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.inditex</groupId>
+            <artifactId>rater-domain-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.inditex</groupId>
+            <artifactId>rater-application-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.inditex</groupId>
+            <artifactId>rater-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.inditex</groupId>
+            <artifactId>rater-dataaccess</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -2,9 +2,9 @@ package com.inditex.rater.domain.valueobject;
 
 import com.inditex.rater.domain.base.BaseId;
 
-public class PriceListId extends BaseId<Integer> {
+public class PriceListId extends BaseId<Long> {
 
-    public PriceListId(Integer value) {
+    public PriceListId(final Long value) {
         super(value);
     }
 }

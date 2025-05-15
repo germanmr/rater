@@ -2,15 +2,14 @@ package com.inditex.rater.domain.entity;
 
 import com.inditex.rater.domain.base.AggregateRoot;
 import com.inditex.rater.domain.valueobject.BrandId;
+import com.inditex.rater.domain.valueobject.Price;
 import com.inditex.rater.domain.valueobject.RaterCurrency;
 import com.inditex.rater.domain.valueobject.RaterDateTime;
-import com.inditex.rater.domain.valueobject.Price;
 import com.inditex.rater.domain.valueobject.PriceListId;
 import com.inditex.rater.domain.valueobject.Priority;
 import com.inditex.rater.domain.valueobject.ProductId;
 
 import java.util.Objects;
-
 
 public final class PriceList extends AggregateRoot<PriceListId> {
 
