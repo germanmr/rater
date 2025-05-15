@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PriceListRepositoryImpl implements PriceListRepository {
+
     @Override
     public PriceList rateProductByDate(BrandId brandId, ProductId productId, RaterDateTime applyDate) {
         return null;

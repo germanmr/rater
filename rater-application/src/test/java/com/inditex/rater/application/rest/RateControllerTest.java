@@ -4,7 +4,7 @@ import com.inditex.rater.application.rest.config.TestConfig;
 import com.inditex.rater.application.rest.mapper.RateMapperImpl;
 import com.inditex.rater.domain.RateApplicationServiceImpl;
 import com.inditex.rater.domain.dto.RateProductRequest;
-import com.inditex.rater.domain.dto.RateProductResponse;
+import com.inditex.rater.domain.entity.PriceList;
 import com.inditex.rater.domain.ports.input.service.RateApplicationService;
 import com.inditex.rater.model.RateRequestDto;
 import com.inditex.rater.model.RateResponseDto;
@@ -33,7 +33,7 @@ class RateControllerTest {
 
     private final RateRequestDto rateRequestDto = RaterDtoData.anyRateRequestDto();
 
-    private final RateProductResponse rateProductResponse = RaterData.anyRateProductResponse();
+    private final PriceList priceList = RaterData.anyPriceList();
 
     @Autowired
     private RateMapperImpl rateMapper;
@@ -50,7 +50,7 @@ class RateControllerTest {
 
     @Test
     void can_rate_product() {
-        Mockito.when(rateApplicationService.rateProduct(rateProductRequest)).thenReturn(rateProductResponse);
+        Mockito.when(rateApplicationService.rateProduct(rateProductRequest)).thenReturn(priceList);
         final ResponseEntity<RateResponseDto> rateResponseDtoResponseEntity = rateController.rateProduct(rateRequestDto);
         assertEquals(RaterDtoData.anyRateResponseDto(), rateResponseDtoResponseEntity.getBody());
     }

@@ -2,6 +2,12 @@ package com.inditex.rater.application.rest;
 
 import com.inditex.rater.domain.dto.RateProductRequest;
 import com.inditex.rater.domain.dto.RateProductResponse;
+import com.inditex.rater.domain.entity.PriceList;
+import com.inditex.rater.domain.valueobject.BrandId;
+import com.inditex.rater.domain.valueobject.Price;
+import com.inditex.rater.domain.valueobject.PriceListId;
+import com.inditex.rater.domain.valueobject.ProductId;
+import com.inditex.rater.domain.valueobject.RaterDateTime;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -34,5 +40,16 @@ public interface RaterData {
                 START_DATE,
                 END_DATE,
                 FINAL_PRICE);
+    }
+
+    static PriceList anyPriceList() {
+        return PriceList.Builder.builder()
+                .brandId(new BrandId(BRAND_ID))
+                .productId(new ProductId(PRODUCT_ID))
+                .startDate(new RaterDateTime(START_DATE))
+                .endDate(new RaterDateTime(END_DATE))
+                .id(new PriceListId(PRICE_LIST))
+                .price(new Price(FINAL_PRICE))
+                .build();
     }
 }

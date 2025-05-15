@@ -1,8 +1,8 @@
 package com.inditex.rater.domain;
 
 import com.inditex.rater.domain.dto.RateProductRequest;
-import com.inditex.rater.domain.dto.RateProductResponse;
 import com.inditex.rater.domain.entity.Brand;
+import com.inditex.rater.domain.entity.PriceList;
 import com.inditex.rater.domain.entity.Product;
 import com.inditex.rater.domain.exception.BrandNotFoundException;
 import com.inditex.rater.domain.exception.ProductNotFoundException;
@@ -12,6 +12,7 @@ import com.inditex.rater.domain.ports.output.repository.PriceListRepository;
 import com.inditex.rater.domain.ports.output.repository.ProductRepository;
 import com.inditex.rater.domain.valueobject.BrandId;
 import com.inditex.rater.domain.valueobject.ProductId;
+import com.inditex.rater.domain.valueobject.RaterDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -37,13 +38,13 @@ public class RateApplicationServiceImpl implements RateApplicationService {
     }
 
     @Override
-    public RateProductResponse rateProduct(@Valid final RateProductRequest rateProductRequest) {
+    public PriceList rateProduct(@Valid final RateProductRequest rateProductRequest) {
         checkBrand(rateProductRequest.getBrandId());
         checkProduct(rateProductRequest.getProductId());
-//        priceListRepository.rateProductByDate(rateProductRequest.getBrandId(),
-//                rateProductRequest.getProductId(),rateProductRequest.getApplyDate() );
-        // PriceList
-        return null;
+        return priceListRepository.rateProductByDate(
+                new BrandId(rateProductRequest.getBrandId()),
+                new ProductId(rateProductRequest.getProductId()),
+                new RaterDateTime(rateProductRequest.getApplyDate()));
     }
 
     private void checkBrand(final Long brandId) {
