@@ -1,4 +1,4 @@
-package com.inditex.rater.dataaccess.brand.adapter;
+package com.inditex.rater.dataaccess.pricelist.adapter;
 
 import com.inditex.rater.domain.entity.PriceList;
 import com.inditex.rater.domain.ports.output.repository.PriceListRepository;
