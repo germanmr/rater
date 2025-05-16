@@ -1,10 +1,15 @@
 package com.inditex.rater.domain.valueobject;
 
-import com.inditex.rater.domain.base.BaseId;
+import org.immutables.value.Value;
 
-public class ProductId extends BaseId<Long> {
+@Value.Immutable(builder = false, copy = false)
+public interface ProductId {
 
-    public ProductId(final Long value) {
-        super(value);
+    @Value.Parameter
+    Long getValue();
+
+    static ProductId of(final Long value) {
+        return ImmutableProductId.of(value);
     }
+
 }

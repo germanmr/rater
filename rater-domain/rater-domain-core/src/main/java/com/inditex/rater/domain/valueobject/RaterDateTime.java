@@ -1,12 +1,17 @@
 package com.inditex.rater.domain.valueobject;
 
-import com.inditex.rater.domain.base.BaseId;
+import org.immutables.value.Value;
 
 import java.time.LocalDateTime;
 
-public class RaterDateTime extends BaseId<LocalDateTime> {
+@Value.Immutable(builder = false, copy = false)
+public interface RaterDateTime {
 
-    public RaterDateTime(final LocalDateTime value) {
-        super(value);
+    @Value.Parameter
+    LocalDateTime getValue();
+
+    static RaterDateTime of(final LocalDateTime value) {
+        return ImmutableRaterDateTime.of(value);
     }
+
 }

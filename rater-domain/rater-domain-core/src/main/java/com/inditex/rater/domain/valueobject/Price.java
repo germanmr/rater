@@ -1,12 +1,16 @@
 package com.inditex.rater.domain.valueobject;
 
-import com.inditex.rater.domain.base.BaseId;
+import org.immutables.value.Value;
 
 import java.math.BigDecimal;
 
-public final class Price extends BaseId<BigDecimal> {
+@Value.Immutable(builder = false, copy = false)
+public interface Price {
 
-    public Price(final BigDecimal value) {
-        super(value);
+    @Value.Parameter
+    BigDecimal getValue();
+
+    static Price of(final BigDecimal value) {
+        return ImmutablePrice.of(value);
     }
 }

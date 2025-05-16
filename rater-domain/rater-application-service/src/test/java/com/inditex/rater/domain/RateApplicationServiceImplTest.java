@@ -1,7 +1,7 @@
 package com.inditex.rater.domain;
 
 import com.inditex.rater.domain.config.TestConfig;
-import com.inditex.rater.domain.dto.RateProductRequest;
+import com.inditex.rater.domain.entity.RateProductRequest;
 import com.inditex.rater.domain.entity.Brand;
 import com.inditex.rater.domain.exception.BrandNotFoundException;
 import com.inditex.rater.domain.exception.ProductNotFoundException;
@@ -29,15 +29,17 @@ class RateApplicationServiceImplTest {
 
     private final Long brandId = 1L;
     private final Long productId = 35455L;
-    private final LocalDateTime applyDate = LocalDateTime.of(2020, Month.JUNE, 14, 10, 00, 00);
+    private final LocalDateTime applyDate = LocalDateTime.of(2020, Month.JUNE, 14, 10, 0, 0);
 
-    private final Brand brand = Brand.builder()
-            .brandId(new BrandId(1L))
-            .name("ZARA")
-            .build();
+    private final Brand brand = Brand.of(BrandId.of(1L), "ZARA");
 
     private final RateProductRequest rateProductRequest =
-            new RateProductRequest(brandId, productId, applyDate);
+            RateProductRequest.builder()
+                    .brandId(brandId)
+                    .productId(productId)
+                    .applyDate(applyDate)
+                    .build();
+
     private RateApplicationServiceImpl rateApplicationService;
 
     @Autowired
@@ -57,7 +59,7 @@ class RateApplicationServiceImplTest {
 
     @Test
     void cannot_rate_product_unexistent_brand() {
-        when(this.brandRepository.getByBrandId(new BrandId(brandId))).thenReturn(Optional.empty());
+        when(this.brandRepository.getByBrandId(BrandId.of(brandId))).thenReturn(Optional.empty());
         final BrandNotFoundException brandNotFoundException =
                 assertThrows(BrandNotFoundException.class, () -> this.rateApplicationService.rateProduct(rateProductRequest));
         assertEquals("Could not find brand with id: 1", brandNotFoundException.getMessage());
@@ -65,7 +67,7 @@ class RateApplicationServiceImplTest {
 
     @Test
     void cannot_rate_product_unexistent_product() {
-        when(this.brandRepository.getByBrandId(new BrandId(brandId))).thenReturn(Optional.of(brand));
+        when(this.brandRepository.getByBrandId(BrandId.of(brandId))).thenReturn(Optional.of(brand));
         final ProductNotFoundException productNotFoundException =
                 assertThrows(ProductNotFoundException.class, () -> this.rateApplicationService.rateProduct(rateProductRequest));
         assertEquals("Could not find product with id: 35455", productNotFoundException.getMessage());

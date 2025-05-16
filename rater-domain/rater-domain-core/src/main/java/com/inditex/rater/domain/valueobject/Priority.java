@@ -1,10 +1,16 @@
 package com.inditex.rater.domain.valueobject;
 
-import com.inditex.rater.domain.base.BaseId;
+import org.immutables.value.Value;
 
-public final class Priority extends BaseId<Integer> {
 
-    public Priority(final Integer value) {
-        super(value);
+@Value.Immutable(builder = false, copy = false)
+public interface Priority {
+
+    @Value.Parameter
+    Integer geValue();
+
+    static Priority of(final Integer value) {
+        return ImmutablePriority.of(value);
     }
+
 }

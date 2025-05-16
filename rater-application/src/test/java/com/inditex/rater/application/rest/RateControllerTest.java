@@ -3,7 +3,7 @@ package com.inditex.rater.application.rest;
 import com.inditex.rater.application.rest.config.TestConfig;
 import com.inditex.rater.application.rest.mapper.RateMapperImpl;
 import com.inditex.rater.domain.RateApplicationServiceImpl;
-import com.inditex.rater.domain.dto.RateProductRequest;
+import com.inditex.rater.domain.entity.RateProductRequest;
 import com.inditex.rater.domain.entity.PriceList;
 import com.inditex.rater.domain.ports.input.service.RateApplicationService;
 import com.inditex.rater.model.RateRequestDto;

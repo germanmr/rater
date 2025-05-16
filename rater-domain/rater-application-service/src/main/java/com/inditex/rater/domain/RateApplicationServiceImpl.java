@@ -1,6 +1,6 @@
 package com.inditex.rater.domain;
 
-import com.inditex.rater.domain.dto.RateProductRequest;
+import com.inditex.rater.domain.entity.RateProductRequest;
 import com.inditex.rater.domain.entity.Brand;
 import com.inditex.rater.domain.entity.PriceList;
 import com.inditex.rater.domain.entity.Product;
@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @Validated
@@ -38,24 +37,24 @@ public class RateApplicationServiceImpl implements RateApplicationService {
     }
 
     @Override
-    public PriceList rateProduct(@Valid final RateProductRequest rateProductRequest) {
+    public PriceList rateProduct(final RateProductRequest rateProductRequest) {
         checkBrand(rateProductRequest.getBrandId());
         checkProduct(rateProductRequest.getProductId());
         return priceListRepository.rateProductByDate(
-                new BrandId(rateProductRequest.getBrandId()),
-                new ProductId(rateProductRequest.getProductId()),
-                new RaterDateTime(rateProductRequest.getApplyDate()));
+                BrandId.of(rateProductRequest.getBrandId()),
+                ProductId.of(rateProductRequest.getProductId()),
+                RaterDateTime.of(rateProductRequest.getApplyDate()));
     }
 
     private void checkBrand(final Long brandId) {
-        final Optional<Brand> optional = brandRepository.getByBrandId(new BrandId(brandId));
+        final Optional<Brand> optional = brandRepository.getByBrandId(BrandId.of(brandId));
         if (optional.isEmpty()) {
             throw new BrandNotFoundException("Could not find brand with id: " + brandId);
         }
     }
 
     private void checkProduct(final Long productId) {
-        final Optional<Product> optional = productRepository.getByProductId(new ProductId(productId));
+        final Optional<Product> optional = productRepository.getByProductId(ProductId.of(productId));
         if (optional.isEmpty()) {
             throw new ProductNotFoundException("Could not find product with id: " + productId);
         }

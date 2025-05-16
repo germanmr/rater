@@ -1,70 +1,20 @@
 package com.inditex.rater.domain.entity;
 
-import com.inditex.rater.domain.base.AggregateRoot;
 import com.inditex.rater.domain.valueobject.BrandId;
+import org.immutables.value.Value;
 
-import java.util.Objects;
+@Value.Immutable(builder = false, copy = false)
+public interface Brand {
 
-public final class Brand extends AggregateRoot<BrandId> {
+    @Value.Parameter
+    BrandId getBrandId();
 
-    private final String name;
+    @Value.Parameter
+    String getName();
 
-    private Brand(Builder builder) {
-        super.setId(builder.id);
-        name = builder.name;
+    static Brand of(final BrandId brandId, final String name) {
+        return ImmutableBrand.of(brandId,name);
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Brand brand = (Brand) o;
-        return Objects.equals(name, brand.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), name);
-    }
-
-    @Override
-    public String toString() {
-        return "Brand{" +
-                "name='" + name + '\'' +
-                '}';
-    }
-
-    public static final class Builder {
-        private BrandId id;
-        private String name;
-
-        private Builder() {
-        }
-
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public Builder brandId(BrandId val) {
-            id = val;
-            return this;
-        }
-
-        public Builder name(String val) {
-            name = val;
-            return this;
-        }
-
-        public Brand build() {
-            return new Brand(this);
-        }
-    }
 }

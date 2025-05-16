@@ -3,7 +3,7 @@ package com.inditex.rater.application.rest.mapper;
 
 import com.inditex.rater.application.rest.RaterData;
 import com.inditex.rater.application.rest.RaterDtoData;
-import com.inditex.rater.domain.dto.RateProductRequest;
+import com.inditex.rater.domain.entity.RateProductRequest;
 import com.inditex.rater.domain.entity.PriceList;
 import com.inditex.rater.model.RateRequestDto;
 import com.inditex.rater.model.RateResponseDto;
@@ -29,6 +29,6 @@ class RateMapperTest {
     @Test
     void can_map_rateProductResponse_To_RateProductResponseDto() {
         assertEquals(this.rateResponseDto,
-                rateMapper.rateProductResponseToRateProductResponseDto(priceList));
+                rateMapper.priceListToRateProductResponseDto(priceList));
     }
 }

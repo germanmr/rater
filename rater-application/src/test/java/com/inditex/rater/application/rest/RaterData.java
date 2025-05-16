@@ -1,12 +1,14 @@
 package com.inditex.rater.application.rest;
 
-import com.inditex.rater.domain.dto.RateProductRequest;
-import com.inditex.rater.domain.dto.RateProductResponse;
+import com.inditex.rater.domain.entity.RateProductRequest;
 import com.inditex.rater.domain.entity.PriceList;
 import com.inditex.rater.domain.valueobject.BrandId;
+import com.inditex.rater.domain.valueobject.CurrencyEnum;
 import com.inditex.rater.domain.valueobject.Price;
 import com.inditex.rater.domain.valueobject.PriceListId;
+import com.inditex.rater.domain.valueobject.Priority;
 import com.inditex.rater.domain.valueobject.ProductId;
+import com.inditex.rater.domain.valueobject.RaterCurrency;
 import com.inditex.rater.domain.valueobject.RaterDateTime;
 
 import java.math.BigDecimal;
@@ -26,30 +28,23 @@ public interface RaterData {
     BigDecimal FINAL_PRICE = new BigDecimal("35.50");
 
     static RateProductRequest anyRateProductRequest() {
-        return new RateProductRequest(
-                BRAND_ID,
-                PRODUCT_ID,
-                APPLY_DATE);
-    }
-
-    static RateProductResponse anyRateProductResponse() {
-        return new RateProductResponse(
-                BRAND_ID,
-                PRODUCT_ID,
-                PRICE_LIST,
-                START_DATE,
-                END_DATE,
-                FINAL_PRICE);
+        return RateProductRequest.builder()
+                .brandId(BRAND_ID)
+                .productId(PRODUCT_ID)
+                .applyDate(APPLY_DATE)
+                .build();
     }
 
     static PriceList anyPriceList() {
-        return PriceList.Builder.builder()
-                .brandId(new BrandId(BRAND_ID))
-                .productId(new ProductId(PRODUCT_ID))
-                .startDate(new RaterDateTime(START_DATE))
-                .endDate(new RaterDateTime(END_DATE))
-                .id(new PriceListId(PRICE_LIST))
-                .price(new Price(FINAL_PRICE))
+        return PriceList.builder()
+                .priceListId(PriceListId.of(PRICE_LIST))
+                .brandId(BrandId.of(BRAND_ID))
+                .productId(ProductId.of(PRODUCT_ID))
+                .startDate(RaterDateTime.of(START_DATE))
+                .priority(Priority.of(1))
+                .raterCurrency(RaterCurrency.of(CurrencyEnum.EUR))
+                .endDate(RaterDateTime.of(END_DATE))
+                .price(Price.of(FINAL_PRICE))
                 .build();
     }
 }

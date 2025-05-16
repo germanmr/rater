@@ -1,7 +1,6 @@
 package com.inditex.rater.application.rest.mapper;
 
-import com.inditex.rater.domain.dto.RateProductRequest;
-import com.inditex.rater.domain.dto.RateProductResponse;
+import com.inditex.rater.domain.entity.RateProductRequest;
 import com.inditex.rater.domain.entity.PriceList;
 import com.inditex.rater.model.RateRequestDto;
 import com.inditex.rater.model.RateResponseDto;
@@ -30,9 +29,9 @@ public interface RateMapper {
     @Mapping(source = "productId.value", target = "productId")
     @Mapping(source = "startDate.value", target = "startDate", qualifiedByName = "rateDateTimeToOffsetDateTime")
     @Mapping(source = "endDate.value", target = "endDate", qualifiedByName = "rateDateTimeToOffsetDateTime")
-    @Mapping(source = "id.value", target = "priceList")
+    @Mapping(source = "priceListId.value", target = "priceList")
     @Mapping(source = "price.value", target = "finalPrice")
-    RateResponseDto rateProductResponseToRateProductResponseDto(final PriceList priceList);
+    RateResponseDto priceListToRateProductResponseDto(final PriceList priceList);
 
     @Named(value = "offsetDateTimeToRateDateTime")
     default LocalDateTime offsetDateTimeToRateDateTime(final OffsetDateTime offsetDateTime) {

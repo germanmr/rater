@@ -1,10 +1,16 @@
 package com.inditex.rater.domain.valueobject;
 
-import com.inditex.rater.domain.base.BaseId;
+import org.immutables.value.Value;
 
-public class RaterCurrency extends BaseId<CurrencyEnum> {
 
-    public RaterCurrency(final CurrencyEnum value) {
-        super(value);
+@Value.Immutable(builder = false, copy = false)
+public interface RaterCurrency {
+
+    @Value.Parameter
+    CurrencyEnum getValue();
+
+    static RaterCurrency of(final CurrencyEnum value) {
+        return ImmutableRaterCurrency.of(value);
     }
+
 }
