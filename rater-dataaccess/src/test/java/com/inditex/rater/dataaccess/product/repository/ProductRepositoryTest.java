@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = {
         DataAccessTestConfiguration.class,
         ProductDataAccessMapperImpl.class})
-class ProductJpaRepositoryTest {
+class ProductRepositoryTest {
 
     private final Long productId = 35455L;
     private final String productName = "First Product";
@@ -35,20 +35,26 @@ class ProductJpaRepositoryTest {
     @Autowired
     private ProductJpaRepository productJpaRepository;
     @Autowired
-    private ProductDataAccessMapper ProductDataAccessMapper;
+    private ProductDataAccessMapper productDataAccessMapper;
 
     private ProductRepositoryImpl productRepository;
 
     @BeforeAll
     void setUp() {
         this.productRepository = new ProductRepositoryImpl(
-                productJpaRepository, ProductDataAccessMapper);
+                productJpaRepository, productDataAccessMapper);
     }
 
     @Test
     void can_get_by_id() {
         when(productJpaRepository.findById(productId)).thenReturn(Optional.of(productEntity));
         assertEquals(Optional.of(product),
+                productRepository.getByProductId(ProductId.of(productId)));
+    }
+
+    @Test
+    void can_get_by_id_no_product() {
+        assertEquals(Optional.empty(),
                 productRepository.getByProductId(ProductId.of(productId)));
     }
 

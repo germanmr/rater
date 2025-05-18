@@ -1,6 +1,7 @@
 package com.inditex.rater.dataaccess.config;
 
 import com.inditex.rater.dataaccess.brand.repository.BrandJpaRepository;
+import com.inditex.rater.dataaccess.pricelist.repository.PriceListJpaRepository;
 import com.inditex.rater.dataaccess.product.repository.ProductJpaRepository;
 import com.inditex.rater.domain.ports.output.repository.BrandRepository;
 import com.inditex.rater.domain.ports.output.repository.PriceListRepository;
@@ -35,6 +36,11 @@ public class DataAccessTestConfiguration {
     @Bean
     public PriceListRepository priceListRepository() {
         return Mockito.mock(PriceListRepository.class);
+    }
+
+    @Bean
+    public PriceListJpaRepository priceListJpaRepository() {
+        return Mockito.mock(PriceListJpaRepository.class);
     }
 
 }

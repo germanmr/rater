@@ -1,8 +1,8 @@
-package com.inditex.rater.dataaccess.brand.repository;
+package com.inditex.rater.dataaccess.brand.adapter;
 
 import com.inditex.rater.dataaccess.brand.mapper.BrandDataAccessMapperImpl;
+import com.inditex.rater.dataaccess.brand.repository.BrandJpaRepository;
 import com.inditex.rater.dataaccess.config.DataAccessTestConfiguration;
-import com.inditex.rater.dataaccess.brand.adapter.BrandRepositoryImpl;
 import com.inditex.rater.dataaccess.brand.entity.BrandEntity;
 import com.inditex.rater.dataaccess.brand.mapper.BrandDataAccessMapper;
 import com.inditex.rater.domain.entity.Brand;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = {
         DataAccessTestConfiguration.class,
         BrandDataAccessMapperImpl.class})
-class BrandJpaRepositoryTest {
+class BrandRepositoryImplTest {
 
     private final Long brandId = 35455L;
     private final String brandName = "First Brand";
@@ -50,6 +50,11 @@ class BrandJpaRepositoryTest {
         when(this.brandJpaRepository.findById(brandId)).thenReturn(Optional.of(brandEntity));
         assertEquals(Optional.of(brand),
                 this.brandRepository.getByBrandId(BrandId.of(brandId)));
+    }
+
+    @Test
+    void can_get_by_id_no_brand() {
+        assertEquals(Optional.empty(),this.brandRepository.getByBrandId(BrandId.of(brandId)));
     }
 
 }
