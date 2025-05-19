@@ -25,6 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -60,8 +61,8 @@ class PriceListRepositoryImplTest {
     private final PriceListEntity priceListEntity = new PriceListEntity(
             priceListId,
             priority,
-            new BrandEntity(brandId,"ZARA"),
-            new ProductEntity(productId,"Product1"),
+            new BrandEntity(brandId, "ZARA"),
+            new ProductEntity(productId, "Product1"),
             currencyEnum,
             price,
             startDate,
@@ -82,9 +83,18 @@ class PriceListRepositoryImplTest {
 
     @Test
     void can_get_by_id() {
-        when(priceListJpaRepository.findByBrandAndProductAndApplyDate(brandId,productId,applyDate)).thenReturn(priceListEntity);
-        assertEquals(priceList,
-                priceListRepository.rateProductByDate(BrandId.of(brandId), ProductId.of(productId), RaterDateTime.of(applyDate)));
+        when(priceListJpaRepository.findByBrandAndProductAndApplyDate(brandId, productId, applyDate))
+                .thenReturn(priceListEntity);
+        assertEquals(Optional.of(priceList),
+                priceListRepository.rateProductByDate(BrandId.of(brandId),
+                        ProductId.of(productId), RaterDateTime.of(applyDate)));
+    }
+
+    @Test
+    void cannot_get_by_id() {
+        assertEquals(Optional.empty(),
+                priceListRepository.rateProductByDate(BrandId.of(brandId),
+                        ProductId.of(productId), RaterDateTime.of(applyDate)));
     }
 
 }

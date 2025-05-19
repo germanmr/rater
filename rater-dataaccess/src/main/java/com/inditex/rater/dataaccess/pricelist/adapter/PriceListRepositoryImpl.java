@@ -10,6 +10,8 @@ import com.inditex.rater.domain.valueobject.RaterDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class PriceListRepositoryImpl implements PriceListRepository {
 
@@ -24,9 +26,9 @@ public class PriceListRepositoryImpl implements PriceListRepository {
     }
 
     @Override
-    public PriceList rateProductByDate(final BrandId brandId,
-                                       final ProductId productId,
-                                       final RaterDateTime applyDate) {
+    public Optional<PriceList> rateProductByDate(final BrandId brandId,
+                                                 final ProductId productId,
+                                                 final RaterDateTime applyDate) {
         return this.priceListDataAccessMapper.priceListEntityToPriceList(
                 this.priceListJpaRepository.findByBrandAndProductAndApplyDate(
                         brandId.getValue(),

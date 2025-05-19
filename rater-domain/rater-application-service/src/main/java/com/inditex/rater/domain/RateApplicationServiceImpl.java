@@ -6,6 +6,7 @@ import com.inditex.rater.domain.entity.PriceList;
 import com.inditex.rater.domain.entity.Product;
 import com.inditex.rater.domain.exception.BrandNotFoundException;
 import com.inditex.rater.domain.exception.ProductNotFoundException;
+import com.inditex.rater.domain.exception.PriceListNotFoundException;
 import com.inditex.rater.domain.ports.input.service.RateApplicationService;
 import com.inditex.rater.domain.ports.output.repository.BrandRepository;
 import com.inditex.rater.domain.ports.output.repository.PriceListRepository;
@@ -41,9 +42,14 @@ public class RateApplicationServiceImpl implements RateApplicationService {
         checkBrand(rateProductRequest.getBrandId());
         checkProduct(rateProductRequest.getProductId());
         return priceListRepository.rateProductByDate(
-                BrandId.of(rateProductRequest.getBrandId()),
-                ProductId.of(rateProductRequest.getProductId()),
-                RaterDateTime.of(rateProductRequest.getApplyDate()));
+                        BrandId.of(rateProductRequest.getBrandId()),
+                        ProductId.of(rateProductRequest.getProductId()),
+                        RaterDateTime.of(rateProductRequest.getApplyDate()))
+                .orElseThrow(() -> new PriceListNotFoundException("Could not found a price list for brand with id: "
+                        + rateProductRequest.getBrandId() + " product id: " +
+                        rateProductRequest.getProductId() + " apply Date: " +
+                        rateProductRequest.getApplyDate()));
+
     }
 
     private void checkBrand(final Long brandId) {

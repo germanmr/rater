@@ -5,8 +5,10 @@ import com.inditex.rater.domain.valueobject.BrandId;
 import com.inditex.rater.domain.valueobject.ProductId;
 import com.inditex.rater.domain.valueobject.RaterDateTime;
 
+import java.util.Optional;
+
 public interface PriceListRepository {
 
-     PriceList rateProductByDate(final BrandId brandId, final ProductId productId, final RaterDateTime applyDate );
+     Optional<PriceList> rateProductByDate(final BrandId brandId, final ProductId productId, final RaterDateTime applyDate );
 
 }
