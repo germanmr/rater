@@ -1,7 +1,9 @@
 package com.inditex.rater.application.exception.handler;
 
 import com.inditex.rater.domain.exception.BrandNotFoundException;
+import com.inditex.rater.domain.exception.PriceListNotFoundException;
 import com.inditex.rater.domain.exception.ProductNotFoundException;
+import com.inditex.rater.domain.exception.base.DomainException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -32,13 +34,16 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseBody
-    @ExceptionHandler(value = {BrandNotFoundException.class, ProductNotFoundException.class})
+    @ExceptionHandler(value = {
+            BrandNotFoundException.class,
+            ProductNotFoundException.class,
+            PriceListNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorDTO handleException(final BrandNotFoundException brandNotFoundException) {
-        log.error(brandNotFoundException.getMessage(), brandNotFoundException);
+    public ErrorDTO handleException(final DomainException domainException) {
+        log.error(domainException.getMessage(), domainException);
         return ErrorDTO.builder()
                 .code(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .message(brandNotFoundException.getMessage())
+                .message(domainException.getMessage())
                 .build();
     }
 
@@ -46,23 +51,21 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {ValidationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDTO handleException(final ValidationException validationException) {
-       ErrorDTO errorDTO;
-       if (validationException instanceof ConstraintViolationException) {
-           String violations = extractViolationsFromException((ConstraintViolationException) validationException);
-           log.error(violations, validationException);
-           errorDTO = ErrorDTO.builder()
-                   .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                   .message(violations)
-                   .build();
-       } else {
-           String exceptionMessage = validationException.getMessage();
-           log.error(exceptionMessage, validationException);
-           errorDTO = ErrorDTO.builder()
-                   .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                   .message(exceptionMessage)
-                   .build();
-       }
-       return errorDTO;
+        if (validationException instanceof ConstraintViolationException) {
+            final String violations = extractViolationsFromException((ConstraintViolationException) validationException);
+            log.error(violations, validationException);
+            return ErrorDTO.builder()
+                    .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                    .message(violations)
+                    .build();
+        } else {
+            final String exceptionMessage = validationException.getMessage();
+            log.error(exceptionMessage, validationException);
+            return ErrorDTO.builder()
+                    .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                    .message(exceptionMessage)
+                    .build();
+        }
     }
 
     private String extractViolationsFromException(ConstraintViolationException validationException) {
