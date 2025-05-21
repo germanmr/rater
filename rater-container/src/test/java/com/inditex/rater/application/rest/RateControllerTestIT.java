@@ -95,7 +95,7 @@ class RateControllerTestIT {
     /**
      * Util method to avoid the addition of "L" suffix when unboxing Long
      *
-     * @param value
+     * @param value a {@link java.lang.Long} value
      * @return Integer
      */
     private Integer matcherLongUnboxing(final Long value) {

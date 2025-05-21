@@ -101,7 +101,7 @@ components:
         startDate:
           type: string
           format: date-time
-          description: Begginning date time of the applied rate
+          description: Beginning date time of the applied rate
         endDate:
           type: string
           format: date-time
