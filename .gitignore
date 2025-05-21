@@ -36,3 +36,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/.idea/checkstyleidea-libs/readme.txt
+/.idea/vcs.xml
