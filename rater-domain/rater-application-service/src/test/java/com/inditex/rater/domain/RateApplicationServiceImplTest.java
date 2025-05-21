@@ -47,9 +47,9 @@ class RateApplicationServiceImplTest {
 
     private final RateProductRequest rateProductRequest =
             RateProductRequest.builder()
-                    .brandId(brandId)
-                    .productId(productId)
-                    .applyDate(applyDate)
+                    .brandId(this.brandId)
+                    .productId(this.productId)
+                    .applyDate(this.applyDate)
                     .build();
 
     private final LocalDateTime startDate = LocalDateTime.of(2020, Month.JUNE, 14, 0, 0, 0);
@@ -60,11 +60,11 @@ class RateApplicationServiceImplTest {
             .priceListId(PriceListId.of(1L))
             .brandId(BrandId.of(1L))
             .productId(ProductId.of(35455L))
-            .startDate(RaterDateTime.of(startDate))
+            .startDate(RaterDateTime.of(this.startDate))
             .priority(Priority.of(1))
             .raterCurrency(RaterCurrency.of(CurrencyEnum.EUR))
-            .endDate(RaterDateTime.of(endDate))
-            .price(Price.of(finalPrice))
+            .endDate(RaterDateTime.of(this.endDate))
+            .price(Price.of(this.finalPrice))
             .build();
 
     private RateApplicationServiceImpl rateApplicationService;
@@ -79,46 +79,49 @@ class RateApplicationServiceImplTest {
     @BeforeEach
     void init() {
         this.rateApplicationService = new RateApplicationServiceImpl(
-                brandRepository,
-                productRepository,
-                priceListRepository);
+                this.brandRepository,
+                this.productRepository,
+                this.priceListRepository);
     }
 
     @Test
     void cannot_rate_product_unexistent_brand() {
-        when(this.brandRepository.getByBrandId(BrandId.of(brandId))).thenReturn(Optional.empty());
+        when(this.brandRepository.getByBrandId(BrandId.of(this.brandId))).thenReturn(Optional.empty());
         final BrandNotFoundException brandNotFoundException =
-                assertThrows(BrandNotFoundException.class, () -> this.rateApplicationService.rateProduct(rateProductRequest));
+                assertThrows(BrandNotFoundException.class, () ->
+                        this.rateApplicationService.rateProduct(this.rateProductRequest));
         assertEquals("Could not find brand with id: 1", brandNotFoundException.getMessage());
     }
 
     @Test
     void cannot_rate_product_unexistent_product() {
-        when(this.brandRepository.getByBrandId(BrandId.of(brandId))).thenReturn(Optional.of(brand));
+        when(this.brandRepository.getByBrandId(BrandId.of(this.brandId))).thenReturn(Optional.of(this.brand));
         final ProductNotFoundException productNotFoundException =
-                assertThrows(ProductNotFoundException.class, () -> this.rateApplicationService.rateProduct(rateProductRequest));
+                assertThrows(ProductNotFoundException.class, () ->
+                        this.rateApplicationService.rateProduct(this.rateProductRequest));
         assertEquals("Could not find product with id: 35455", productNotFoundException.getMessage());
     }
 
     @Test
     void cannot_rate_product_no_price_list() {
-        when(this.brandRepository.getByBrandId(BrandId.of(brandId))).thenReturn(Optional.of(brand));
-        when(this.productRepository.getByProductId(ProductId.of(productId))).thenReturn(Optional.of(product));
+        when(this.brandRepository.getByBrandId(BrandId.of(this.brandId))).thenReturn(Optional.of(this.brand));
+        when(this.productRepository.getByProductId(ProductId.of(this.productId))).thenReturn(Optional.of(this.product));
         final PriceListNotFoundException priceListNotFoundException =
                 assertThrows(PriceListNotFoundException.class,
-                        () -> this.rateApplicationService.rateProduct(rateProductRequest));
-        assertEquals("Could not found a price list for brand with id: "
-                + rateProductRequest.getBrandId() + " product id: " +
-                rateProductRequest.getProductId() + " apply Date: " +
-                rateProductRequest.getApplyDate(), priceListNotFoundException.getMessage());
+                        () -> this.rateApplicationService.rateProduct(this.rateProductRequest));
+        assertEquals("Could not found a price list for brand with id: " +
+                this.rateProductRequest.getBrandId() + " product id: " +
+                this.rateProductRequest.getProductId() + " apply Date: " +
+                this.rateProductRequest.getApplyDate(), priceListNotFoundException.getMessage());
     }
 
     @Test
     void can_rate_product() {
-        when(this.brandRepository.getByBrandId(BrandId.of(brandId))).thenReturn(Optional.of(brand));
-        when(this.productRepository.getByProductId(ProductId.of(productId))).thenReturn(Optional.of(product));
-        when(this.priceListRepository.rateProductByDate(BrandId.of(brandId), ProductId.of(productId), RaterDateTime.of(applyDate)))
+        when(this.brandRepository.getByBrandId(BrandId.of(this.brandId))).thenReturn(Optional.of(this.brand));
+        when(this.productRepository.getByProductId(ProductId.of(this.productId))).thenReturn(Optional.of(this.product));
+        when(this.priceListRepository.rateProductByDate(
+                BrandId.of(this.brandId), ProductId.of(this.productId), RaterDateTime.of(this.applyDate)))
                 .thenReturn(Optional.of(priceList));
-        assertEquals(priceList, this.rateApplicationService.rateProduct(rateProductRequest));
+        assertEquals(this.priceList, this.rateApplicationService.rateProduct(this.rateProductRequest));
     }
 }

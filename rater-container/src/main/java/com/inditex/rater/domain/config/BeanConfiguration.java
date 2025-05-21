@@ -8,18 +8,11 @@ import com.inditex.rater.dataaccess.pricelist.mapper.PriceListDataAccessMapper;
 import com.inditex.rater.dataaccess.pricelist.mapper.PriceListDataAccessMapperImpl;
 import com.inditex.rater.dataaccess.product.mapper.ProductDataAccessMapper;
 import com.inditex.rater.dataaccess.product.mapper.ProductDataAccessMapperImpl;
-import com.inditex.rater.domain.RateDomainService;
-import com.inditex.rater.domain.RateDomainServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanConfiguration {
-
-    @Bean
-    public RateDomainService rateDomainService() {
-        return new RateDomainServiceImpl();
-    }
 
     @Bean
     public RateMapper rateMapper() {
