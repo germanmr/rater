@@ -50,8 +50,9 @@ class RateControllerTest {
 
     @Test
     void can_rate_product() {
-        Mockito.when(rateApplicationService.rateProduct(rateProductRequest)).thenReturn(priceList);
-        final ResponseEntity<RateResponseDto> rateResponseDtoResponseEntity = rateController.rateProduct(rateRequestDto);
+        Mockito.when(this.rateApplicationService.rateProduct(this.rateProductRequest)).thenReturn(this.priceList);
+        final ResponseEntity<RateResponseDto> rateResponseDtoResponseEntity =
+                rateController.rateProduct(this.rateRequestDto);
         assertEquals(RaterDtoData.anyRateResponseDto(), rateResponseDtoResponseEntity.getBody());
     }
 }

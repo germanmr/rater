@@ -42,19 +42,19 @@ class BrandRepositoryImplTest {
     @BeforeAll
     void setUp() {
         this.brandRepository = new BrandRepositoryImpl(
-                brandJpaRepository, brandDataAccessMapper);
+                this.brandJpaRepository, this.brandDataAccessMapper);
     }
 
     @Test
     void can_get_by_id() {
-        when(this.brandJpaRepository.findById(brandId)).thenReturn(Optional.of(brandEntity));
-        assertEquals(Optional.of(brand),
-                this.brandRepository.getByBrandId(BrandId.of(brandId)));
+        when(this.brandJpaRepository.findById(this.brandId)).thenReturn(Optional.of(this.brandEntity));
+        assertEquals(Optional.of(this.brand),
+                this.brandRepository.getByBrandId(BrandId.of(this.brandId)));
     }
 
     @Test
     void can_get_by_id_no_brand() {
-        assertEquals(Optional.empty(),this.brandRepository.getByBrandId(BrandId.of(brandId)));
+        assertEquals(Optional.empty(),this.brandRepository.getByBrandId(BrandId.of(this.brandId)));
     }
 
 }

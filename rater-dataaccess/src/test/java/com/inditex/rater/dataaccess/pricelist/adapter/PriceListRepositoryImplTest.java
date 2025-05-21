@@ -78,23 +78,23 @@ class PriceListRepositoryImplTest {
     @BeforeAll
     void setUp() {
         this.priceListRepository = new PriceListRepositoryImpl(
-                priceListDataAccessMapper, priceListJpaRepository);
+                this.priceListDataAccessMapper, this.priceListJpaRepository);
     }
 
     @Test
     void can_get_by_id() {
-        when(priceListJpaRepository.findByBrandAndProductAndApplyDate(brandId, productId, applyDate))
-                .thenReturn(priceListEntity);
-        assertEquals(Optional.of(priceList),
-                priceListRepository.rateProductByDate(BrandId.of(brandId),
-                        ProductId.of(productId), RaterDateTime.of(applyDate)));
+        when(this.priceListJpaRepository.findByBrandAndProductAndApplyDate(this.brandId, this.productId, this.applyDate))
+                .thenReturn(this.priceListEntity);
+        assertEquals(Optional.of(this.priceList),
+                this.priceListRepository.rateProductByDate(BrandId.of(this.brandId),
+                        ProductId.of(this.productId), RaterDateTime.of(this.applyDate)));
     }
 
     @Test
     void cannot_get_by_id() {
         assertEquals(Optional.empty(),
-                priceListRepository.rateProductByDate(BrandId.of(brandId),
-                        ProductId.of(productId), RaterDateTime.of(applyDate)));
+                this.priceListRepository.rateProductByDate(BrandId.of(this.brandId),
+                        ProductId.of(this.productId), RaterDateTime.of(this.applyDate)));
     }
 
 }

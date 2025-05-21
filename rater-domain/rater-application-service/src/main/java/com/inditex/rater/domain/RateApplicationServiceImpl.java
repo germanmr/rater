@@ -41,7 +41,7 @@ public class RateApplicationServiceImpl implements RateApplicationService {
     public PriceList rateProduct(final RateProductRequest rateProductRequest) {
         checkBrand(rateProductRequest.getBrandId());
         checkProduct(rateProductRequest.getProductId());
-        return priceListRepository.rateProductByDate(
+        return this.priceListRepository.rateProductByDate(
                         BrandId.of(rateProductRequest.getBrandId()),
                         ProductId.of(rateProductRequest.getProductId()),
                         RaterDateTime.of(rateProductRequest.getApplyDate()))
@@ -53,14 +53,14 @@ public class RateApplicationServiceImpl implements RateApplicationService {
     }
 
     private void checkBrand(final Long brandId) {
-        final Optional<Brand> optional = brandRepository.getByBrandId(BrandId.of(brandId));
+        final Optional<Brand> optional = this.brandRepository.getByBrandId(BrandId.of(brandId));
         if (optional.isEmpty()) {
             throw new BrandNotFoundException("Could not find brand with id: " + brandId);
         }
     }
 
     private void checkProduct(final Long productId) {
-        final Optional<Product> optional = productRepository.getByProductId(ProductId.of(productId));
+        final Optional<Product> optional = this.productRepository.getByProductId(ProductId.of(productId));
         if (optional.isEmpty()) {
             throw new ProductNotFoundException("Could not find product with id: " + productId);
         }

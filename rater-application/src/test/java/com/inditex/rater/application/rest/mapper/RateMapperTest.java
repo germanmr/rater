@@ -34,6 +34,6 @@ class RateMapperTest {
     void can_map_rateProductResponse_To_RateProductResponseDto() {
         assertEquals(this.rateResponseDto,rateMapper.priceListToRateProductResponseDto(priceList));
 
-        assertNull(rateMapper.priceListToRateProductResponseDto(null));
+        assertNull(this.rateMapper.priceListToRateProductResponseDto(null));
     }
 }

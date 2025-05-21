@@ -16,7 +16,7 @@ class GlobalExceptionHandlerTest {
                         .code("Not Found")
                         .message("could not find brand with id: " + 1L)
                         .build(),
-                globalExceptionHandler.handleException(
+                this.globalExceptionHandler.handleException(
                         new BrandNotFoundException("could not find brand with id: " + 1L)));
     }
 
@@ -26,7 +26,7 @@ class GlobalExceptionHandlerTest {
                         .code("Internal Server Error")
                         .message("Unexpected error!")
                         .build(),
-                globalExceptionHandler.handleException(
+                this.globalExceptionHandler.handleException(
                         new Exception("Some error")));
     }
 

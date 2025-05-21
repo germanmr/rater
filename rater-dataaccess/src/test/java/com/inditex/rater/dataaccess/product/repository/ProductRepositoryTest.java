@@ -28,9 +28,9 @@ class ProductRepositoryTest {
     private final String productName = "First Product";
 
     private final Product product = Product.of(
-            ProductId.of(productId), productName);
+            ProductId.of(this.productId), this.productName);
 
-    private final ProductEntity productEntity = new ProductEntity(productId, productName);
+    private final ProductEntity productEntity = new ProductEntity(this.productId, this.productName);
 
     @Autowired
     private ProductJpaRepository productJpaRepository;
@@ -42,20 +42,20 @@ class ProductRepositoryTest {
     @BeforeAll
     void setUp() {
         this.productRepository = new ProductRepositoryImpl(
-                productJpaRepository, productDataAccessMapper);
+                this.productJpaRepository, this.productDataAccessMapper);
     }
 
     @Test
     void can_get_by_id() {
-        when(productJpaRepository.findById(productId)).thenReturn(Optional.of(productEntity));
-        assertEquals(Optional.of(product),
-                productRepository.getByProductId(ProductId.of(productId)));
+        when(this.productJpaRepository.findById(this.productId)).thenReturn(Optional.of(this.productEntity));
+        assertEquals(Optional.of(this.product),
+                this.productRepository.getByProductId(ProductId.of(this.productId)));
     }
 
     @Test
     void can_get_by_id_no_product() {
         assertEquals(Optional.empty(),
-                productRepository.getByProductId(ProductId.of(productId)));
+                this.productRepository.getByProductId(ProductId.of(this.productId)));
     }
 
 }
