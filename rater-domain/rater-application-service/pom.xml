@@ -8,8 +8,8 @@
     </parent>
 
     <artifactId>rater-application-service</artifactId>
-
     <packaging>jar</packaging>
+
     <name>rater-application-service</name>
     <url>http://maven.apache.org</url>
 
