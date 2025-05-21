@@ -29,6 +29,8 @@
         <immutables.version>2.10.1</immutables.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <junit-jupiter.version>5.7.0</junit-jupiter.version>
+        <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
+        <org.immutables-version>2.10.1</org.immutables-version>
     </properties>
 
     <dependencyManagement>
@@ -127,7 +129,7 @@
                                 <dependency>
                                     <groupId>org.immutables</groupId>
                                     <artifactId>value</artifactId>
-                                    <version>2.10.1</version>
+                                    <version>${org.immutables-version}</version>
                                 </dependency>
                             </annotationProcessorPaths>
                             <release>17</release>
@@ -138,7 +140,14 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
+                <version>${jacoco-maven-plugin.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/inditex/rater/api/*.*</exclude>
+                        <exclude>com/inditex/rater/model/*Dto*.*</exclude>
+                        <exclude>com/inditex/rater/application/rest/config/*.*</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>jacoco-initialize</id>
