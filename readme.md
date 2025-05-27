@@ -168,7 +168,7 @@ Modules list: ( In alphabetical order to be easily found in the tree file )
 
 ## Copyright
 
-Released under the Apache License 2.0. See the [LICENSE](https://github.com/germanmr/rater/master/LICENSE) file.
+Released under the Apache License 2.0. See the [LICENSE](https://github.com/germanmr/rater/blob/master/LICENSE) file.
 
 [(Back to the top)](#inditex-core-platform-technical-test)
 
