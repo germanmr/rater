@@ -22,8 +22,10 @@
 
 ## About the project
 
-This is Inditex Core Platform Technical Test, developed with Java 17, Spring Boot 2.7.18 and an in-memory H2 Database.
-The application takes a Product, Brand and DateTime and returns the corresponding Pricing Details
+This is the Inditex Core Platform Technical Test, developed with Java 17, Spring Boot 2.7.18 and an in-memory H2 Database.
+
+The application takes a Brand, a Product and a DateTime, then returns the corresponding Pricing Details
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Requirements
@@ -52,7 +54,7 @@ Besides Maven's **clean** and **install** default goals this will:
 * Run **Unit** and **Integration** Tests
 * Generate and gather Jacoco Reports
 
-Regarding **Jacoco Reports**, they can be found in the **Jacoco Aggregate** module, specifically in:
+Regarding **Jacoco Reports**, they can be found in the **Jacoco Aggregate** module, specifically the file:
 
 Location:
 
@@ -131,7 +133,7 @@ Hexagonal architecture was applied, thus separating the Core Domain from the Ext
 The developed was made starting from the Core: **Domain Core** and **Domain application services**, defining entities,
 and interfaces for the inputs and outputs ports to define the interaction with the outside world. Later the **rater-application** and **rater-dataccess** 
 modules were implemented tyo connect to the exterior. Finally, **rater-container** binds all modules in order to be able to 
-start the application and made the connection between the interfaces ports and the outside.
+start the application, and inject the proper implementations for the defined interfaces ports to the outside.
 A Jacoco aggregate module was added to check tests coverage.
 
 Modules list: ( In alphabetical order to be easily found in the tree file )     
@@ -175,4 +177,5 @@ Released under the Apache License 2.0. See the [LICENSE](https://github.com/germ
 Developed by [German Muñoz Romano](https://github.com/germanmr)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
- 
+
+[Back to the top](#inditex-core-platform-technical-test)
