@@ -26,7 +26,7 @@ This is the Inditex Core Platform Technical Test, developed with Java 17, Spring
 
 The application takes a Brand, a Product and a DateTime, then returns the corresponding Pricing Details
 
-[Back to the top](#inditex-core-platform-technical-test)
+[(Back to the top)](#inditex-core-platform-technical-test)
 
 ## Requirements
 
@@ -35,7 +35,7 @@ For building and running the application you need:
 - [JDK 1.17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 - [Maven 3](https://maven.apache.org)
 
-[Back to the top](#inditex-core-platform-technical-test)
+[(Back to the top)](#inditex-core-platform-technical-test)
 
 ## Running the application locally
 
@@ -125,7 +125,7 @@ An **Invalid Request**, in this case without the "brandId" attribute
         "message": "brandId no debe ser nulo"
     }
 
-[Back to the top](#inditex-core-platform-technical-test)
+[(Back to the top)](#inditex-core-platform-technical-test)
 
 ## Modules
 
@@ -146,7 +146,7 @@ Modules list: ( In alphabetical order to be easily found in the tree file )
   * **Rater Core**: The core classes associated with the Domain
 * **Rater Jacoco Aggregate**: Module that compiles all the Jacoco results from the other ones
 
-[Back to the top](#inditex-core-platform-technical-test)
+[(Back to the top)](#inditex-core-platform-technical-test)
 
 ## Tools:
 * [JDK 1.17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
@@ -164,16 +164,16 @@ Modules list: ( In alphabetical order to be easily found in the tree file )
 * [Adapter Pattern](https://refactoring.guru/design-patterns/adapter)
 * [SOLID principles](https://en.wikipedia.org/wiki/SOLID)
 
-[Back to the top](#inditex-core-platform-technical-test)
+[(Back to the top)](#inditex-core-platform-technical-test)
 
 ## Copyright
 
 Released under the Apache License 2.0. See the [LICENSE](https://github.com/germanmr/rater/master/LICENSE) file.
 
-[Back to the top](#inditex-core-platform-technical-test)
+[(Back to the top)](#inditex-core-platform-technical-test)
 
 ## Author
 
 Developed by [German Muñoz Romano](https://github.com/germanmr)
 
-[Back to the top](#inditex-core-platform-technical-test)
+[(Back to the top)](#inditex-core-platform-technical-test)
