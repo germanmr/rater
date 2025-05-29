@@ -19,18 +19,17 @@ import java.util.Optional;
 @Mapper
 public interface PriceListDataAccessMapper {
 
-    default Optional<PriceList> priceListEntityToPriceList(final PriceListEntity priceListEntity) {
-        return Optional.ofNullable(priceListEntity)
-                .map(ple -> PriceList.builder()
-                        .priceListId(PriceListId.of(ple.getId()))
-                        .brandId(BrandId.of(ple.getBrandEntity().getId()))
-                        .productId(ProductId.of(ple.getProductEntity().getId()))
-                        .price(Price.of(ple.getPrice()))
-                        .startDate(RaterDateTime.of(ple.getStartDate()))
-                        .endDate(RaterDateTime.of(ple.getEndDate()))
-                        .priority(Priority.of(ple.getPriority()))
-                        .raterCurrency(RaterCurrency.of(ple.getCurrency()))
-                        .build());
+    default Optional<PriceList> priceListEntityToPriceList(final Optional<PriceListEntity> priceListEntity) {
+        return priceListEntity.map(ple -> PriceList.builder()
+                .priceListId(PriceListId.of(ple.getId()))
+                .brandId(BrandId.of(ple.getBrandEntity().getId()))
+                .productId(ProductId.of(ple.getProductEntity().getId()))
+                .price(Price.of(ple.getPrice()))
+                .startDate(RaterDateTime.of(ple.getStartDate()))
+                .endDate(RaterDateTime.of(ple.getEndDate()))
+                .priority(Priority.of(ple.getPriority()))
+                .raterCurrency(RaterCurrency.of(ple.getCurrency()))
+                .build());
     }
 }
 

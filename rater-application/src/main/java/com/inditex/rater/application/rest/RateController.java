@@ -29,8 +29,8 @@ public class RateController extends GlobalExceptionHandler implements RateApi {
 
     @Override
     public ResponseEntity<RateResponseDto> rateProduct(@RequestBody RateRequestDto rateRequestDto) {
-        log.info("Rating product: {} for brand: {} ", rateRequestDto.getProductId(), rateRequestDto.getBrandId());
-        return new ResponseEntity<RateResponseDto>(
+        log.debug("Rating product: {} for brand: {} ", rateRequestDto.getProductId(), rateRequestDto.getBrandId());
+        return new ResponseEntity<>(
                 this.rateMapper.priceListToRateProductResponseDto(
                 this.rateApplicationService.rateProduct(
                         this.rateMapper.rateRequestDtoToRateRequest(rateRequestDto)))

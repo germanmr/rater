@@ -21,10 +21,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -83,8 +85,9 @@ class PriceListRepositoryImplTest {
 
     @Test
     void can_get_by_id() {
-        when(this.priceListJpaRepository.findByBrandAndProductAndApplyDate(this.brandId, this.productId, this.applyDate))
-                .thenReturn(this.priceListEntity);
+        when(this.priceListJpaRepository.findByBrandAndProductAndApplyDate(
+                this.brandId, this.productId, this.applyDate, PageRequest.of(0, 1)))
+                .thenReturn(List.of(this.priceListEntity));
         assertEquals(Optional.of(this.priceList),
                 this.priceListRepository.rateProductByDate(BrandId.of(this.brandId),
                         ProductId.of(this.productId), RaterDateTime.of(this.applyDate)));
